@@ -141,24 +141,26 @@ If S = [1,2,3], a solution is:
   [3],
 ]*/
 
-void solve(int start,vector<int> &A,vector<int>&row,vector<vector<int>>&res){
-    res.push_back(row);
-    for(int i=start;i<A.size();i++){
-    row.emplace_back(A[i]);
-    solve(i+1,A,row,res);
-    row.pop_back();
+class Solution {
+public:
+    void dfs(vector<int>& nums, vector<int>& ans, vector<vector<int>>& res, int start) {
+        res.push_back(ans);
+        for (int i = start; i < nums.size(); i++) {
+          
+            ans.push_back(nums[i]);
+            dfs(nums, ans, res, i + 1);
+            ans.pop_back();
+        }
     }
-}
-
-vector<vector<int> > Solution::subsets(vector<int> &A) {
-    int n=A.size();
-    vector<vector<int> >res;
-    vector<int>row;
-    sort(A.begin(),A.end());
-    solve(0,A,row,res);
-    sort(res.begin(),res.end());
-    return res;
-}
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+         vector<int> ans;
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        dfs(nums, ans, res, 0);
+        return res;
+    }
+};
 
 Que5:Subset2
 
@@ -180,27 +182,27 @@ If S = [1,2,2], the solution is:
 [2, 2]
 ]*/
 
-void solve(int i,vector<int>&A,vector<int>&row,vector<vector<int> >&res){
-    if(i==A.size()){
-        res.push_back(row);
-        return; 
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> ans;
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        dfs(nums, ans, res, 0);
+        return res;
     }
-    if(i>A.size()) return;
-    row.push_back(A[i]);
-    solve(i+1,A,row,res);
-    row.pop_back();
-    solve(i+1,A,row,res);
-}
-
-vector<vector<int> > Solution::subsetsWithDup(vector<int> &A) {
-    vector<vector<int> >res;
-    vector<int>row;
-    sort(A.begin(),A.end());
-    solve(0,A,row,res);
-    sort(res.begin(),res.end());
-    res.erase(unique(res.begin(),res.end()),res.end());
-    return res;
-}
+    void dfs(vector<int>& nums, vector<int> & ans,vector<vector<int>> &res,int start)
+    {
+        res.push_back(ans);
+        for(int i=start;i<nums.size();i++)
+        {
+            if(i>start &&  nums[i]==nums[i-1]) continue;
+            ans.push_back(nums[i]);
+            dfs(nums,ans,res,i+1);
+            ans.pop_back();
+        }
+    }
+};
 
 Que6: Sudoku
 
