@@ -262,6 +262,8 @@ Que: Dijkstra using adjacency list (Follow up)
 
 (5) Topological sorting
 
+https://www.youtube.com/watch?v=qe_pQCh09yU
+
 Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge uv, 
 vertex u comes before v in the ordering.Topological Sorting for a graph is not possible if the graph is not a DAG.
 
